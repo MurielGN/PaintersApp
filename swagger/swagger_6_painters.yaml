@@ -1,0 +1,551 @@
+swagger: '2.0'
+info:
+  version: '2022-03-28T10:45:09Z'
+  description: API for PaintersAPP
+  title: PaintersAPP
+host: rc033lrye6.execute-api.us-east-1.amazonaws.com
+basePath: /v2
+schemes:
+  - https
+tags:
+  - name: materials
+    description: CRUD over materials table
+  - name: paints
+    description: CRUD over paints table
+  - name: budget
+    description: Calculate the budger
+paths:
+  /materials:
+    get:
+      tags:
+        - materials
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/MaterialsArray'
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: >-
+          arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:178233312549:function:get-all-materials-painters/invocations
+        responses:
+          default:
+            statusCode: '200'
+        passthroughBehavior: when_no_match
+        contentHandling: CONVERT_TO_TEXT
+        type: aws
+    post:
+      tags:
+        - materials
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Material object that needs to be added to the database
+          required: true
+          schema:
+            $ref: '#/definitions/Material'
+      responses:
+        '200':
+          description: successful operation
+        '405':
+          description: Invalid input
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: >-
+          arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:178233312549:function:post-materials-painters/invocations
+        responses:
+          default:
+            statusCode: '200'
+        requestTemplates:
+          application/json: |-
+            #set($inputRoot = $input.path('$'))
+            {
+                "item": $input.json('$')
+            }
+        passthroughBehavior: when_no_templates
+        contentHandling: CONVERT_TO_TEXT
+        type: aws
+  /materials/filter/{expression}:
+    get:
+      tags:
+        - materials
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "expression"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/MaterialsArray"
+        '400':
+          description: Invalid expression
+        '404':
+          description: Material not found
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:178233312549:function:get-materials-StarWithName-painters/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: |-
+            #set($inputRoot = $input.path('$'))
+            {
+                "expression": "$input.params('id')"
+            }
+        passthroughBehavior: "when_no_templates"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws"
+  /materials/{id}:
+    get:
+      tags:
+        - materials
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Material'
+        '400':
+          description: Invalid id
+        '404':
+          description: Material not found
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: >-
+          arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:178233312549:function:get-one-materias-painters/invocations
+        responses:
+          default:
+            statusCode: '200'
+        requestTemplates:
+          application/json: |-
+            #set($inputRoot = $input.path('$'))
+            {
+                "id": $input.params('id')
+            }
+        passthroughBehavior: when_no_templates
+        contentHandling: CONVERT_TO_TEXT
+        type: aws
+    put:
+      tags:
+        - materials
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Material object that needs to be added to the database
+          required: true
+          schema:
+            $ref: '#/definitions/Material'
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid id
+        '404':
+          description: Materials not found
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: >-
+          arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:178233312549:function:put-one-materials-painters/invocations
+        responses:
+          default:
+            statusCode: '200'
+        requestTemplates:
+          application/json: |-
+            #set($inputRoot = $input.path('$'))
+            {
+                "id": $input.params('id'),
+                "item": $input.json('$')
+            }
+        passthroughBehavior: when_no_templates
+        contentHandling: CONVERT_TO_TEXT
+        type: aws
+    delete:
+      tags:
+        - materials
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid id
+        '404':
+          description: Material not found
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: >-
+          arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:178233312549:function:delete-materials-painters/invocations
+        responses:
+          default:
+            statusCode: '200'
+        requestTemplates:
+          application/json: |-
+            #set($inputRoot = $input.path('$'))
+            {
+                "id": $input.params('id')
+            }
+        passthroughBehavior: when_no_templates
+        contentHandling: CONVERT_TO_TEXT
+        type: aws
+  /paints:
+    get:
+      tags:
+        - paints
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/PaintsArray'
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: >-
+          arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:178233312549:function:get-all-paints-painters/invocations
+        responses:
+          default:
+            statusCode: '200'
+        passthroughBehavior: when_no_match
+        contentHandling: CONVERT_TO_TEXT
+        type: aws
+    post:
+      tags:
+        - paints
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Paint object that needs to be added to the database
+          required: true
+          schema:
+            $ref: '#/definitions/Paint'
+      responses:
+        '200':
+          description: successful operation
+        '405':
+          description: Invalid input
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: >-
+          arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:178233312549:function:post-paints-painters/invocations
+        responses:
+          default:
+            statusCode: '200'
+        requestTemplates:
+          application/json: |-
+            #set($inputRoot = $input.path('$'))
+            {
+                "item": $input.json('$')
+            }
+        passthroughBehavior: when_no_templates
+        contentHandling: CONVERT_TO_TEXT
+        type: aws
+  /paints/filter/{expression}:
+    get:
+      tags:
+        - paints
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "expression"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/PaintsArray"
+        '400':
+          description: Invalid expression
+        '404':
+          description: Paints not found
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:178233312549:function:get-paints-StarWithName-painters/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: |-
+            #set($inputRoot = $input.path('$'))
+            {
+                "expression": "$input.params('id')"
+            }
+        passthroughBehavior: "when_no_templates"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws"
+  /paints/{id}:
+    get:
+      tags:
+        - paints
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Paint'
+        '400':
+          description: Invalid id
+        '404':
+          description: Paint not found
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: >-
+          arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:178233312549:function:get-one-paints-painters/invocations
+        responses:
+          default:
+            statusCode: '200'
+        requestTemplates:
+          application/json: |-
+            #set($inputRoot = $input.path('$'))
+            {
+                "id": $input.params('id')
+            }
+        passthroughBehavior: when_no_templates
+        contentHandling: CONVERT_TO_TEXT
+        type: aws
+    put:
+      tags:
+        - paints
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Material object that needs to be added to the database
+          required: true
+          schema:
+            $ref: '#/definitions/Paint'
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid id
+        '404':
+          description: Paint not found
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: >-
+          arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:178233312549:function:post-one-paints-painters/invocations
+        responses:
+          default:
+            statusCode: '200'
+        requestTemplates:
+          application/json: |-
+            #set($inputRoot = $input.path('$'))
+            {
+                "id": $input.params('id'),
+                "item": $input.json('$')
+            }
+        passthroughBehavior: when_no_templates
+        contentHandling: CONVERT_TO_TEXT
+        type: aws
+    delete:
+      tags:
+        - paints
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid id
+        '404':
+          description: Paint not found
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: >-
+          arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:178233312549:function:delete-paints-painters/invocations
+        responses:
+          default:
+            statusCode: '200'
+        requestTemplates:
+          application/json: |-
+            #set($inputRoot = $input.path('$'))
+            {
+                "id": $input.params('id')
+            }
+        passthroughBehavior: when_no_templates
+        contentHandling: CONVERT_TO_TEXT
+        type: aws
+  /bugdet:
+    post:
+      tags:
+        - budget
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Material object that needs to be added to the database
+          required: true
+          schema:
+            type: "array"
+            items:
+              $ref: '#/definitions/House'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Budget'
+        '405':
+          description: Invalid input
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: >-
+          arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:178233312549:function:budget-painters/invocations
+        responses:
+          default:
+            statusCode: '200'
+        requestTemplates:
+          application/json: |-
+            #set($inputRoot = $input.path('$'))
+            {
+                "item": $input.json('$')
+            }
+        passthroughBehavior: when_no_templates
+        contentHandling: CONVERT_TO_TEXT
+        type: aws
+definitions:
+  Empty:
+    type: object
+    title: Empty Schema
+  Material:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      price:
+        type: number
+    xml:
+      name: Material
+  MaterialsArray:
+    type: array
+    items:
+      $ref: '#/definitions/Material'
+  Paint:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      type:
+        type: string
+      efficiency:
+        type: number
+      price:
+        type: number
+    xml:
+      name: Paint
+  PaintsArray:
+    type: array
+    items:
+      $ref: '#/definitions/Paint'
+  Budget:
+    type: number
+  House:
+    type: object
+    properties:
+      numberofhouses:
+        type: integer
+        format: int64
+      benefits:
+        type: number
+      materials:
+        $ref: '#/definitions/ArrayMaterialBudget'
+      paints:
+        $ref: '#/definitions/ArrayPaintBudget'
+  POSTBudget:
+    type: array
+    items:
+      $ref: '#/definitions/House'
+  ArrayMaterialBudget:
+    type: array
+    items:
+      $ref: '#/definitions/BUDGETMaterial'
+  BUDGETMaterial:
+    type: object
+    properties:
+      id:
+        type: integer
+      amount:
+        type: integer
+  ArrayPaintBudget:
+    type: array
+    items:
+      $ref: '#/definitions/BUDGETPaint'
+  BUDGETPaint:
+    type: object
+    properties:
+      id:
+        type: integer
+      surface:
+        type: integer
