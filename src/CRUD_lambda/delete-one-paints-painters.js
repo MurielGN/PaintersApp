@@ -8,7 +8,7 @@ var statusCode;
 
 
 function verify(value) {
-  if (value <= 0 || isNaN(value)) {
+  if (value <= 0 || isNaN(value) || value == undefined) {
     statusCode = 400;
     throw new Error("The id " + value + " is invalid");
   }
