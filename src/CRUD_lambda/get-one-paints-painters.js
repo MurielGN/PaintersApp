@@ -25,7 +25,7 @@ async function queryItems(id) {
 
   if (data.Count == 0) {
     statusCode = 404;
-    throw new Error("Material with id: " + id + " not found");
+    throw new Error("Material with id: ${id} not found");
   }
 
   data = data.Items[0];
@@ -35,7 +35,7 @@ async function queryItems(id) {
 function verify(value) {
   if (value <= 0 || isNaN(value)) {
     statusCode = 400;
-    throw new Error("The id " + value + " is invalid");
+    throw new Error("The id ${value} is invalid");
   }
 }
 
