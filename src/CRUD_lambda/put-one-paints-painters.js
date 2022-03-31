@@ -16,19 +16,19 @@ function verify(value) {
   
   if (Object.keys(value).length != NUMBER_COLUMNS) {
     statusCode = 405;
-    throw new Error("The id " + value + " is invalid");
+    throw new Error("The id ${value} is invalid");
   }
   
   for(let key of Object.keys(value)){
     
     if(Object.keys(NAMES_COLUMSN).indexOf(key) == -1){
       statusCode = 405;
-      throw new Error("Item " + JSON.stringify(value) + " is invalid");
+      throw new Error("Item ${JSON.stringify(value)} is invalid");
     }    
     
     if(typeof value[key] !== NAMES_COLUMSN[key]){
       statusCode = 405;
-      throw new Error(key+": " + value[key] + " is not a "+NAMES_COLUMSN[key]);
+      throw new Error("${key}: ${value[key]} is not a ${NAMES_COLUMSN[key]}");
     }
     
   }
@@ -39,7 +39,7 @@ function verify(value) {
 function verifyID(value) {
   if (value <= 0 || isNaN(value) || value == undefined) {
     statusCode = 400;
-    throw new Error("The id: " + value + " is invalid");
+    throw new Error("The id: ${value} is invalid");
   }
   
   return value;
@@ -56,7 +56,7 @@ exports.handler = async (event, context) => {
     
     if( parseInt(data.id) != parseInt(id)){
         statusCode = 405;
-        throw new Error("id: "+id+" and item.id: "+data.id+" don't match");
+        throw new Error("id: ${id} and item.id: ${data.id} don't match");
     }
   
     params = {
