@@ -75,7 +75,7 @@ exports.handler = async (event, context) => {
     
   } catch (err) {
     return {
-      statusCode: 404,
+      statusCode: 405,
       Error: err.toString(),
     };
   }
