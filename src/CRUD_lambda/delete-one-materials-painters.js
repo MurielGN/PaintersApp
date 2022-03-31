@@ -10,7 +10,7 @@ var statusCode;
 function verify(value) {
   if (value <= 0 || isNaN(value) || value == undefined) {
     statusCode = 400;
-    throw new Error("The id " + value + " is invalid");
+    throw new Error("The id ${value} is invalid");
   }
   return value;
 }
@@ -31,11 +31,9 @@ exports.handler = async (event, context) => {
       }
     }).promise();
     
-    console.log("Status: "+ statusCode);
-    
     if(body.Attributes == undefined){
       statusCode = 404;
-      throw new Error("Material with id: " + event.id + " not found");
+      throw new Error("Material with id: ${event.id} not found");
     }
     
       return {
