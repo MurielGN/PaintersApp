@@ -22,7 +22,7 @@ async function queryItems(filterStarWith){
     
     if(data.Count == 0){
       statusCode = 404;
-      throw new Error("Materials name starting with: " + filterStarWith + " not found");
+      throw new Error("Materials name starting with: ${filterStarWith} not found");
     }
     
     return data.Items
@@ -42,7 +42,7 @@ exports.handler = async (event, context) => {
     let filterStarWith = event.expression;
     if(typeof filterStarWith !== "string" || filterStarWith === ""){
       statusCode = 400;
-      throw new Error("Expression: " + filterStarWith + " is invalid");
+      throw new Error("Expression: ${filterStarWith} is invalid");
     }
     
     body = await queryItems(filterStarWith);
