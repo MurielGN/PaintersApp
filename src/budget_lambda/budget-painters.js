@@ -20,7 +20,7 @@ async function queryItems(tabla, valor, element) {
   const data = await dynamo.query(params).promise();
   if (data.Items[0] == undefined) {
     console.log(valor)
-    throw new Error("item with id: " + valor + " not found"+data.Items);
+    throw new Error("item with id: ${valor} not found ${data.Items)}";
   } else {
     return data.Items[0];
   }
@@ -28,7 +28,7 @@ async function queryItems(tabla, valor, element) {
 
 function verify(value) {
   if (value <= 0 || isNaN(value)) {
-    throw new Error("The value " + value + " is invalid");
+    throw new Error("The value ${value} is invalid");
   }
 }
 
@@ -57,11 +57,8 @@ exports.handler = async (event, context) => {
       }
 
       tmpBudget *= house.numberofhouses;
-      console.log("PRESUPUESTO SIN GANANCIAS " + tmpBudget);
 
       tmpBudget *= 1 + house.benefits / 100;
-
-      console.log("PRESUPUESTO CON GANANCIAS " + tmpBudget);
 
       budget += tmpBudget;
 
