@@ -22,7 +22,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/MurielGN/PaintersApp">
-    <img src="https://gravity.es/wp-content/uploads/2021/08/logo-blue.svg" alt="Logo" width="80" height="80">
+    <img src="https://gravity.es/wp-content/uploads/2021/08/logo-blue.svg" alt="Logo" width="150" height="150">
   </a>
 
   <h3 align="center">Painters App</h3>
@@ -31,9 +31,9 @@
     Application to calculate painting budgets!
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/MurielGN/PaintersApp/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/MurielGN/PaintersApp/issues">Request Feature</a>
   </p>
 </div>
 
@@ -54,17 +54,11 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#Deploy">Deploy</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
-
 
 
 <!-- ABOUT THE PROJECT -->
@@ -73,7 +67,6 @@
 An application that facilitates the calculation of budgets for a painting company. The deployment will be done with CloudFormation and serverless framework
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 ### Built With
@@ -93,6 +86,7 @@ Lambdas are built in:
 
 
 <!-- GETTING STARTED -->
+## Getting Started
 
 ### Prerequisites
 
