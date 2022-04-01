@@ -2,7 +2,7 @@ const AWS = require("aws-sdk");
 
 const DYNAMO = new AWS.DynamoDB.DocumentClient();
 
-const TABLE_DYNAMODB = "materials";
+const TABLE_DYNAMODB = "paints";
 
 var statusCode;
 
@@ -13,22 +13,19 @@ async function queryItems(filterStarWith){
     
     KeyConditionExpression: '#partitionKeyName = :partitionkeyval',
     FilterExpression: 'begins_with (#starWith, :substr)',
-    ExpressionAttributeValues: { ':partitionkeyval': 'material', ':substr': filterStarWith},
-    ExpressionAttributeNames: { '#partitionKeyName': 'element', '#starWith': 'name' },
+    ExpressionAttributeValues: { ':partitionkeyval': 'paint', ':substr': filterStarWith},
+    ExpressionAttributeNames: { '#partitionKeyName': 'element', '#starWith': 'type' },
   }
   
-  try {
     const data = await DYNAMO.query(params).promise();
     
     if(data.Count == 0){
       statusCode = 404;
-      throw new Error("Materials name starting with: " + filterStarWith + " not found");
+      throw new Error("Paints type starting with: ${filterStarWith} not found");
     }
     
     return data.Items
-  } catch (err) {
-    return err
-  }
+
   
 }
 
@@ -40,9 +37,9 @@ exports.handler = async (event, context) => {
   try {
     
     let filterStarWith = event.expression;
-    if(typeof filterStarWith !== "string" || filterStarWith === ""){
+    if(typeof filterStarWith !== "string" || !isNaN(filterStarWith)|| filterStarWith === ""){
       statusCode = 400;
-      throw new Error("Expression: " + filterStarWith + " is invalid");
+      throw new Error("Expression: ${filterStarWith} is invalid");
     }
     
     body = await queryItems(filterStarWith);

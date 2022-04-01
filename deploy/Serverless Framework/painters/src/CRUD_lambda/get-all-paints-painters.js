@@ -5,14 +5,14 @@ const DYNAMO = new AWS.DynamoDB.DocumentClient();
 const TABLE_DYNAMODB = "paints";
 
 
-async function queryItems(filterStarWith){
+async function queryItems(){
   var params = {
     TableName: TABLE_DYNAMODB,
     
     KeyConditionExpression: '#partitionKeyName = :partitionkeyval',
-    FilterExpression: 'begins_with (#starWith, :substr)',
-    ExpressionAttributeValues: { ':partitionkeyval': 'paint', ':substr': filterStarWith},
-    ExpressionAttributeNames: { '#partitionKeyName': 'element', '#starWith': 'type' },
+
+    ExpressionAttributeValues: { ':partitionkeyval': 'paint' },
+    ExpressionAttributeNames: { '#partitionKeyName': 'element' }
   }
   
   try {
@@ -27,14 +27,14 @@ async function queryItems(filterStarWith){
 
 exports.handler = async (event, context) => {
   let body;
-  let statusCode = 200;
-
-  let filterStarWith = event.expression;
-  body = await queryItems(filterStarWith);
+  let status = 200;
+  
+  body = await queryItems();
   
     return {
-    statusCode,
+    status,
     body,
+
   };
 
 }

@@ -8,9 +8,9 @@ var statusCode;
 
 
 function verify(value) {
-  if (value <= 0 || isNaN(value)) {
+  if (value <= 0 || isNaN(value) || value == undefined) {
     statusCode = 400;
-    throw new Error("The id " + value + " is invalid");
+    throw new Error("The id ${value} is invalid");
   }
   return value;
 }
@@ -32,7 +32,7 @@ exports.handler = async (event, context) => {
       
       if(body.Attributes == undefined){
         statusCode = 404;
-        throw new Error("Paint with id: " + event.id + " not found");
+        throw new Error("Paint with id: ${event.id} not found");
       }
       
         return {

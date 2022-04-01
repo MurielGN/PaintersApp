@@ -4,20 +4,26 @@ const dynamo = new AWS.DynamoDB.DocumentClient();
 
 const TABLE_DYNAMODB = "materials";
 
-var statusCode;
+var status;
+var msg;
 
 
 function verify(value) {
-  if (value <= 0 || isNaN(value)) {
-    statusCode = 400;
-    throw new Error("The id " + value + " is invalid");
+  if (value <= 0 || isNaN(value) || value == undefined) {
+    status = 400;
+    msg = `The id ${value} is invalid`;
+    throw new Error(msg);
   }
   return value;
 }
 
 exports.handler = async (event, context) => {
   let body;
-  statusCode = 200;
+  status = 200;
+  
+  let {id} = event.pathParameters
+  id = parseInt(id);
+  verify(id);
   
   
   try {
@@ -27,25 +33,24 @@ exports.handler = async (event, context) => {
       ReturnValues: "ALL_OLD",
       Key: {
         element: 'material',
-        id: verify(event.id)
+        id: id
       }
     }).promise();
     
-    console.log("Status: "+ statusCode);
-    
     if(body.Attributes == undefined){
-      statusCode = 404;
-      throw new Error("Material with id: " + event.id + " not found");
+      status = 404;
+      msg = `Material with id: ${event.id} not found`;
+      throw new Error(msg);
     }
     
       return {
-      statusCode,
+      status,
       body
     };
   
   } catch (err) {
     return {
-      statusCode,
+      status,
       Error: err.toString(),
     };
   }

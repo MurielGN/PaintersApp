@@ -4,10 +4,10 @@ const dynamo = new AWS.DynamoDB.DocumentClient();
 
 var params;
 
-const TABLE_DYNAMODB = "materials";
-const NAME_PK_ARROW = "material";
-const NUMBER_COLUMNS = 3;
-const NAMES_COLUMSN = { "id":"number", "name":"string","price":"number"};
+const TABLE_DYNAMODB = "paints";
+const NAME_PK_ARROW = "paint";
+const NUMBER_COLUMNS = 4;
+const NAMES_COLUMSN = { "id":"number", "efficiency":"number", "price":"number", "type":"string"};
 
 var statusCode;
 
@@ -16,30 +16,21 @@ function verify(value) {
   
   if (Object.keys(value).length != NUMBER_COLUMNS) {
     statusCode = 405;
-    throw new Error("The id " + value + " is invalid");
+    throw new Error("The id ${value} is invalid");
   }
   
   for(let key of Object.keys(value)){
     
     if(Object.keys(NAMES_COLUMSN).indexOf(key) == -1){
       statusCode = 405;
-      throw new Error("Item " + JSON.stringify(value) + " is invalid");
+      throw new Error("Item ${JSON.stringify(value)} is invalid");
     }    
     
     if(typeof value[key] !== NAMES_COLUMSN[key]){
       statusCode = 405;
-      throw new Error(key+": " + value[key] + " is not a "+NAMES_COLUMSN[key]);
+      throw new Error("${key}: ${value[key]} is not a ${NAMES_COLUMSN[key]}");
     }
     
-  }
-  
-  return value;
-}
-
-function verifyID(value) {
-  if (value <= 0 || isNaN(value)) {
-    statusCode = 400;
-    throw new Error("The id: " + value + " is invalid");
   }
   
   return value;
@@ -52,20 +43,15 @@ exports.handler = async (event, context) => {
   
   try {
     let data = verify(event.item);
-    let id = verifyID(event.id);
-    
-    if( parseInt(data.id) != parseInt(id)){
-        statusCode = 405;
-        throw new Error("id: "+id+" and item.id: "+data.id+" don't match");
-    }
   
     params = {
       TableName: TABLE_DYNAMODB,
       Item: {
-           element: NAME_PK_ARROW,
-           id:      data.id,
-           name:    data.name,
-           price:   data.price
+           element:    NAME_PK_ARROW,
+           id:         data.id,
+           type:       data.type,
+           price:      data.price,
+           efficiency: data.efficiency
       },
     };
     

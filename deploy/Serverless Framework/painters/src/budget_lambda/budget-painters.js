@@ -19,8 +19,7 @@ async function queryItems(tabla, valor, element) {
 
   const data = await dynamo.query(params).promise();
   if (data.Items[0] == undefined) {
-    console.log(valor)
-    throw new Error("item with id: ${valor} not found ${data.Items)}";
+    throw new Error("item with id: ${valor} not found ${data.Items)}");
   } else {
     return data.Items[0];
   }
