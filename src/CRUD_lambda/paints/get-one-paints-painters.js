@@ -25,7 +25,8 @@ async function queryItems(id) {
 
   if (data.Count == 0) {
     statusCode = 404;
-    throw new Error("Material with id: ${id} not found");
+    let msg = `Material with id: ${id} not found`;
+    throw new Error(msg);
   }
 
   data = data.Items[0];
@@ -35,7 +36,8 @@ async function queryItems(id) {
 function verify(value) {
   if (value <= 0 || isNaN(value)) {
     statusCode = 400;
-    throw new Error("The id ${value} is invalid");
+    let msg = `The id ${value} is invalid`;
+    throw new Error(msg);
   }
 }
 
@@ -46,7 +48,6 @@ exports.handler = async (event, context) => {
   try {
     let id = event.id;
     verify(id);
-
     body = await queryItems(id);
 
     return {

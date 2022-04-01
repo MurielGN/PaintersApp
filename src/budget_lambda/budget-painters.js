@@ -3,7 +3,7 @@ const dynamo = new AWS.DynamoDB.DocumentClient();
 
 // LAMBDA ARREGLADA RAUL
 async function queryItems(tabla, valor, element) {
-    var params = {
+  var params = {
     TableName: tabla,
     KeyConditionExpression:
       "#partitionKeyName = :partitionkeyval AND #sortKeyName = :sortkeyval",
@@ -19,8 +19,9 @@ async function queryItems(tabla, valor, element) {
 
   const data = await dynamo.query(params).promise();
   if (data.Items[0] == undefined) {
-    console.log(valor)
-    throw new Error("item with id: ${valor} not found ${data.Items)}";
+    console.log(valor);
+    let msg = `item with id: ${valor} not found ${data.Items}`;
+    throw new Error(msg);
   } else {
     return data.Items[0];
   }
@@ -28,31 +29,30 @@ async function queryItems(tabla, valor, element) {
 
 function verify(value) {
   if (value <= 0 || isNaN(value)) {
-    throw new Error("The value ${value} is invalid");
+    let msg = `The value ${value} is invalid`;
+    throw new Error(msg);
   }
 }
 
 exports.handler = async (event, context) => {
   try {
-    
     const statusCode = 200;
     let data = event.item;
-    let budget = 0
-    
-    
+    let budget = 0;
+
     for (let house of data) {
       let tmpBudget = 0;
       for (let material of house.materials) {
-        verify(material.amount)
-        
-        let materialDB = await queryItems("materials", material.id,"material");
+        verify(material.amount);
+
+        let materialDB = await queryItems("materials", material.id, "material");
         tmpBudget += materialDB.price * material.amount;
       }
 
       for (let paint of house.paints) {
-        verify(paint.surface)
-        
-        let pinturaBD = await queryItems("paints", paint.id,"paint");
+        verify(paint.surface);
+
+        let pinturaBD = await queryItems("paints", paint.id, "paint");
         tmpBudget += (paint.surface / pinturaBD.efficiency) * pinturaBD.price;
       }
 
@@ -69,7 +69,6 @@ exports.handler = async (event, context) => {
       statusCode,
       budget: budget,
     };
-    
   } catch (err) {
     return {
       statusCode: 405,
