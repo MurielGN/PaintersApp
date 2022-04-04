@@ -1,7 +1,7 @@
-deleteonematerialspainters:
+getmaterialsStarWithNamepainters:
   Type: 'AWS::Lambda::Function'
   Properties:
-    FunctionName: 'delete-one-materials-painters'
+    FunctionName: 'get-materials-StarWithName-painters'
     Handler: index.handler
     Runtime: nodejs12.x
     Role:
@@ -10,4 +10,4 @@ deleteonematerialspainters:
     Code:
       S3Bucket:
         Ref: BucketS3
-      S3Key: 'delete-one-materials-painters.zip'
+      S3Key: 'get-materials-StarWithName-painters.zip'
