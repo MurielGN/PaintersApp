@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Example Lambda zip copy
+
+Parameters:
+  LambdaRoleARN:
+    Type: String
+    Default: 'arn:aws:iam::178233312549:role/LabRole'
+    
+Resources:
+  'Fn::Transform':
+    Name: 'AWS::Include'
+    Parameters:
+      Location: s3://test-cf-1/putonematerialspainters.yaml
