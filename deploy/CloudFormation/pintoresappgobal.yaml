@@ -92,6 +92,108 @@ Resources:
   #trozo de la api rest
 
   #trozo de las dynamos
+
+  materials: 
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions: 
+        - 
+          AttributeName: "element"
+          AttributeType: "S"
+        - 
+          AttributeName: "id"
+          AttributeType: "N"
+
+      KeySchema: 
+        - 
+          AttributeName: "element"
+          KeyType: "HASH"
+        - 
+          AttributeName: "id"
+          KeyType: "RANGE"
+
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "1"
+        WriteCapacityUnits: "1"
+
+      TableName: "materials"
+
+  paints: 
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions: 
+        - 
+          AttributeName: "element"
+          AttributeType: "S"
+        - 
+          AttributeName: "id"
+          AttributeType: "N"
+
+      KeySchema: 
+        - 
+          AttributeName: "element"
+          KeyType: "HASH"
+        - 
+          AttributeName: "id"
+          KeyType: "RANGE"
+
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "1"
+        WriteCapacityUnits: "1"
+
+      TableName: "paints"
+
+  houses: 
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions: 
+        - 
+          AttributeName: "element"
+          AttributeType: "S"
+        - 
+          AttributeName: "id"
+          AttributeType: "N"
+
+      KeySchema: 
+        - 
+          AttributeName: "element"
+          KeyType: "HASH"
+        - 
+          AttributeName: "id"
+          KeyType: "RANGE"
+
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "1"
+        WriteCapacityUnits: "1"
+
+      TableName: "houses"
+
+  budgets: 
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions: 
+        - 
+          AttributeName: "element"
+          AttributeType: "S"
+        - 
+          AttributeName: "id"
+          AttributeType: "N"
+
+      KeySchema: 
+        - 
+          AttributeName: "element"
+          KeyType: "HASH"
+        - 
+          AttributeName: "id"
+          KeyType: "RANGE"
+
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "1"
+        WriteCapacityUnits: "1"
+
+      TableName: "budgets"
+
+      
 Outputs:
 
   putonematerialspainters:
