@@ -93,107 +93,90 @@ Resources:
 
   #trozo de las dynamos
 
-  materials: 
+  myBudgetTable:
     Type: AWS::DynamoDB::Table
-    Properties: 
-      AttributeDefinitions: 
-        - 
-          AttributeName: "element"
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "element"
           AttributeType: "S"
-        - 
-          AttributeName: "id"
+        - AttributeName: "id"
           AttributeType: "N"
 
-      KeySchema: 
-        - 
-          AttributeName: "element"
+      KeySchema:
+        - AttributeName: "element"
           KeyType: "HASH"
-        - 
-          AttributeName: "id"
+        - AttributeName: "id"
           KeyType: "RANGE"
 
-      ProvisionedThroughput: 
+      ProvisionedThroughput:
         ReadCapacityUnits: "1"
         WriteCapacityUnits: "1"
 
-      TableName: "materials"
-
-  paints: 
+      TableName: "budgets"
+      
+  myHousesTable:
     Type: AWS::DynamoDB::Table
-    Properties: 
-      AttributeDefinitions: 
-        - 
-          AttributeName: "element"
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "element"
           AttributeType: "S"
-        - 
-          AttributeName: "id"
+        - AttributeName: "id"
           AttributeType: "N"
 
-      KeySchema: 
-        - 
-          AttributeName: "element"
+      KeySchema:
+        - AttributeName: "element"
           KeyType: "HASH"
-        - 
-          AttributeName: "id"
+        - AttributeName: "id"
           KeyType: "RANGE"
 
-      ProvisionedThroughput: 
-        ReadCapacityUnits: "1"
-        WriteCapacityUnits: "1"
-
-      TableName: "paints"
-
-  houses: 
-    Type: AWS::DynamoDB::Table
-    Properties: 
-      AttributeDefinitions: 
-        - 
-          AttributeName: "element"
-          AttributeType: "S"
-        - 
-          AttributeName: "id"
-          AttributeType: "N"
-
-      KeySchema: 
-        - 
-          AttributeName: "element"
-          KeyType: "HASH"
-        - 
-          AttributeName: "id"
-          KeyType: "RANGE"
-
-      ProvisionedThroughput: 
+      ProvisionedThroughput:
         ReadCapacityUnits: "1"
         WriteCapacityUnits: "1"
 
       TableName: "houses"
 
-  budgets: 
+  myMaterialsTable:
     Type: AWS::DynamoDB::Table
-    Properties: 
-      AttributeDefinitions: 
-        - 
-          AttributeName: "element"
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "element"
           AttributeType: "S"
-        - 
-          AttributeName: "id"
+        - AttributeName: "id"
           AttributeType: "N"
 
-      KeySchema: 
-        - 
-          AttributeName: "element"
+      KeySchema:
+        - AttributeName: "element"
           KeyType: "HASH"
-        - 
-          AttributeName: "id"
+        - AttributeName: "id"
           KeyType: "RANGE"
 
-      ProvisionedThroughput: 
+      ProvisionedThroughput:
         ReadCapacityUnits: "1"
         WriteCapacityUnits: "1"
 
-      TableName: "budgets"
+      TableName: "materials"
+  
+  myPaintsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "element"
+          AttributeType: "S"
+        - AttributeName: "id"
+          AttributeType: "N"
 
-      
+      KeySchema:
+        - AttributeName: "element"
+          KeyType: "HASH"
+        - AttributeName: "id"
+          KeyType: "RANGE"
+
+      ProvisionedThroughput:
+        ReadCapacityUnits: "1"
+        WriteCapacityUnits: "1"
+
+      TableName: "paints"
+
 Outputs:
 
   putonematerialspainters:
