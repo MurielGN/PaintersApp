@@ -79,7 +79,7 @@ exports.handler = async (event, context) => {
         let pinturaBD = await queryItems("paints", paint.id, "paint");
         tmpBudget += (paint.surface / pinturaBD.efficiency) * pinturaBD.price;
 
-        items.paints.push(paints);
+        items.paints.push(paint);
       }
 
       saveHouseBudget(tmpBudget, items, 'houses', 'house');
