@@ -37,7 +37,7 @@ Resources:
                 type: "aws"
                 uri: !Sub
                   -  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
-                  - lambdaArn: !ImportValue putonepaintspainters
+                  - lambdaArn: !ImportValue budgetpainters
                 httpMethod: "POST"
                 responses:
                   default:
@@ -469,6 +469,14 @@ Resources:
     Properties:
       Action: lambda:InvokeFunction
       FunctionName: !ImportValue getonematerialspainters
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+
+  lambdaApiGatewayInvoke13:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !ImportValue budgetpainters
       Principal: apigateway.amazonaws.com
       SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
   
