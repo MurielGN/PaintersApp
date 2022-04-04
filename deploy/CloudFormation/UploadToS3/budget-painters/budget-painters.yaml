@@ -1,0 +1,12 @@
+Type: "AWS::Lambda::Function"
+Properties:
+  FunctionName: "budget-painters"
+  Handler: index.handler
+  Runtime: nodejs12.x
+  Role:
+    Ref: LambdaRoleARN
+  Timeout: 300
+  Code:
+    S3Bucket:
+      Ref: BucketS3
+    S3Key: "budget-painters/budget-painters.zip"

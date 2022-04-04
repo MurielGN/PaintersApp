@@ -1,0 +1,12 @@
+Type: "AWS::Lambda::Function"
+Properties:
+  FunctionName: "put-one-paints-painters"
+  Handler: index.handler
+  Runtime: nodejs12.x
+  Role:
+    Ref: LambdaRoleARN
+  Timeout: 300
+  Code:
+    S3Bucket:
+      Ref: BucketS3
+    S3Key: "paints/put-one-paints-painters/put-one-paints-painters.zip"

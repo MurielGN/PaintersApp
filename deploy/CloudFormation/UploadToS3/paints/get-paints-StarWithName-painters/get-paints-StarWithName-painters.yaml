@@ -1,0 +1,12 @@
+Type: "AWS::Lambda::Function"
+Properties:
+  FunctionName: "get-paints-StarWithName-painters"
+  Handler: index.handler
+  Runtime: nodejs12.x
+  Role:
+    Ref: LambdaRoleARN
+  Timeout: 300
+  Code:
+    S3Bucket:
+      Ref: BucketS3
+    S3Key: "paints/get-paints-StarWithName-painters/get-paints-StarWithName-painters.zip"

@@ -47,6 +47,47 @@ Resources:
       Parameters:
         Location: !Sub s3://${BucketS3}/materials/put-one-materials-painters/put-one-materials-painters.yaml
 
+  deleteonepaintspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/paints/delete-one-paints-painters/delete-one-paints-painters.yaml
+
+  getallpaintspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/paints/get-all-paints-painters/get-all-paints-painters.yaml
+
+  getonepaintspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/paints/get-one-paints-painters/get-one-paints-painters.yaml
+
+  getpaintsStarWithNamepainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/paints/get-paints-StarWithName-painters/get-paints-StarWithName-painters.yaml
+
+  postpaintspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/paints/post-paints-painters/post-paints-painters.yaml
+
+  putonepaintspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/paints/put-one-paints-painters/put-one-paints-painters.yaml
+
+  budgetpainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/budget-painters/budget-painters.yaml
 
   #trozo de la api rest
 
