@@ -1,0 +1,12 @@
+Type: "AWS::Lambda::Function"
+Properties:
+  FunctionName: "post-materials-painters"
+  Handler: index.handler
+  Runtime: nodejs12.x
+  Role:
+    Ref: LambdaRoleARN
+  Timeout: 300
+  Code:
+    S3Bucket:
+      Ref: BucketS3
+    S3Key: "materials/post-materials-painters/post-materials-painters.zip"

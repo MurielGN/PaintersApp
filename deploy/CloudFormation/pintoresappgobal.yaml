@@ -1,21 +1,53 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Example Lambda zip copy
 
-
 Parameters:
   LambdaRoleARN:
     Type: String
-    Default: 'arn:aws:iam::178233312549:role/LabRole'
+    Default: 'arn:aws:iam::147023161607:role/LabRole'
+    
+  BucketS3:
+    Type: String
+    Default: 'painterapp'
+    
+Resources:
+  deleteonematerialspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/materials/delete-one-materials-painters/delete-one-materials-painters.yaml
+  
+  getallmaterialspainters:  
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/materials/get-all-materials-painters/get-all-materials-painters.yaml
 
+  getonematerialspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/materials/get-one-materials-painters/get-one-materials-painters.yaml
+  
+  getmaterialsStarWithNamepainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/materials/get-materials-StarWithName-painters/get-materials-StarWithName-painters.yaml
 
-Transform:
-  Name: 'AWS::Include'
-  Parameters:
-    Location: 's3://test-cf-1/putonematerialspainters.yaml'
+  postmaterialspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/materials/post-materials-painters/post-materials-painters.yaml
+
+  putonematerialspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/materials/put-one-materials-painters/put-one-materials-painters.yaml
+
 
   #trozo de la api rest
 
   #trozo de las dynamos
-
-  
-
