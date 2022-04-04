@@ -1,11 +1,16 @@
-putonematerialspainters:
-  Type: 'AWS::Lambda::Function'
-  Properties:
-    FunctionName: test1YamlPartido
-    Handler: index.handler
-    Runtime: nodejs12.x
-    Role: 'arn:aws:iam::178233312549:role/LabRole'
-    Timeout: 300
-    Code:
-      S3Bucket: 'lambda-respository-test-1'
-      S3Key: 'put-one-materials-painters.zip'
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Example Lambda zip copy
+    
+Resources:
+  putonematerialspainters:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: testslambdacompleto
+      Handler: index.handler
+      Runtime: nodejs12.x
+      Role:
+        Ref: LambdaRoleARN
+      Timeout: 300
+      Code:
+        S3Bucket: 'lambda-respository-test-1'
+        S3Key: 'put-one-materials-painters.zip'
