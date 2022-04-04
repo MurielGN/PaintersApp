@@ -1,25 +1,21 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Resources: 
-  myDynamoDBTable: 
+Resources:
+  myDynamoDBTable:
     Type: AWS::DynamoDB::Table
-    Properties: 
-      AttributeDefinitions: 
-        - 
-          AttributeName: "element"
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "element"
           AttributeType: "S"
-        - 
-          AttributeName: "id"
+        - AttributeName: "id"
           AttributeType: "N"
 
-      KeySchema: 
-        - 
-          AttributeName: "element"
+      KeySchema:
+        - AttributeName: "element"
           KeyType: "HASH"
-        - 
-          AttributeName: "id"
+        - AttributeName: "id"
           KeyType: "RANGE"
 
-      ProvisionedThroughput: 
+      ProvisionedThroughput:
         ReadCapacityUnits: "1"
         WriteCapacityUnits: "1"
 
