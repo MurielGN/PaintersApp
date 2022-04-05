@@ -89,34 +89,6 @@ Resources:
       Parameters:
         Location: !Sub s3://${BucketS3}/budget-painters/budget-painters.yaml
 
-  #trozo de la api rest
-
-  #trozo de las dynamos
-
-  myBudgetTable:
-    'Fn::Transform':
-      Name: 'AWS::Include'
-      Parameters:
-        Location: !Sub s3://${BucketS3}/dynamodb/budgets.yaml
-      
-  myHousesTable:
-    'Fn::Transform':
-      Name: 'AWS::Include'
-      Parameters:
-        Location: !Sub s3://${BucketS3}/dynamodb/houses.yaml
-
-  myMaterialsTable:
-    'Fn::Transform':
-      Name: 'AWS::Include'
-      Parameters:
-        Location: !Sub s3://${BucketS3}/dynamodb/materials.yaml
-  
-  myPaintsTable:
-    'Fn::Transform':
-      Name: 'AWS::Include'
-      Parameters:
-        Location: !Sub s3://${BucketS3}/dynamodb/paints.yaml
-
 Outputs:
 
   putonematerialspainters:
