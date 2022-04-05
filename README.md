@@ -108,8 +108,6 @@ Installation guide
 
 ### Deploy
 
-  #### With Serverless Framework [readme](https://github.com/MurielGN/PaintersApp/tree/main/deploy/Serverless%20Framework/PaintersApp/README.md)
-
   #### DynamoDB Tables
 
 1. In the dynamodb-template.yml file change the BucketS3 Parameter with your bucket name
@@ -215,6 +213,8 @@ Installation guide
         --capabilities CAPABILITY_IAM
     ```
   
+  #### With Serverless Framework [readme](https://github.com/MurielGN/PaintersApp/tree/main/deploy/Serverless%20Framework/PaintersApp/README.md)
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
