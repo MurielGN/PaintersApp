@@ -108,7 +108,7 @@ Installation guide
 
 ### Deploy
 
-  ### With Serverless Framework readme [a link](https://github.com/MurielGN/PaintersApp/tree/main/deploy/Serverless%20Framework/PaintersApp/README.md)
+  ### With Serverless Framework [readme](https://github.com/MurielGN/PaintersApp/tree/main/deploy/Serverless%20Framework/PaintersApp/README.md)
 
   #### DynamoDB Tables
 
