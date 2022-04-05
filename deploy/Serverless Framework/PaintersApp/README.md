@@ -59,6 +59,19 @@ Which should result in response similar to the following (removed `input` conten
 
 ### Local development
 
+You can deploy all infraestructure on locally:
+
+  1. Install plugin offline:
+    ``` npm install serverless-offline --save-dev```
+
+  2. Install plugin dynamodb local:
+    ``` npm install --save serverless-dynamodb-local```
+    Install DynamoDB Local ```sls dynamodb install```
+  
+  3. Deploy locally for testing:
+    ``` serverless offline start ```
+  
+
 You can invoke your function locally by using the following command:
 
 ```bash
