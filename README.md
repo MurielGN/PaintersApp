@@ -147,38 +147,36 @@ Installation guide
 1. In the lambda-template.yml file change the BucketS3 Parameter with your bucket name
 
   Before
-  
     ```yaml
-      BucketS3:
-      Type: String
-      Default: 'bucket-name'
-    ```
-  
-  After
-
-    ```yaml
-      BucketS3:
-      Type: String
-      Default: 'painterapp'
-    ```
-
-2. In the lambda-template.yml file change the LambdaRoleARN Parameter with the arn of the role you want to use
-
-  Before
-  
-    ```yaml
-      LambdaRoleARN:
-      Type: String
-      Default: 'role-arn'
+    BucketS3:
+    Type: String
+    Default: 'bucket-name'
     ```
   
   After
 
   ```yaml
-      LambdaRoleARN:
-      Type: String
-      Default: 'arn:aws:iam::147023161607:role/LabRole'
+    BucketS3:
+    Type: String
+    Default: 'painterapp'
+  ```
+
+2. In the lambda-template.yml file change the LambdaRoleARN Parameter with the arn of the role you want to use
+
+  Before
+    ```yaml
+    LambdaRoleARN:
+    Type: String
+    Default: 'role-arn'
     ```
+  
+  After
+
+  ```yaml
+    LambdaRoleARN:
+    Type: String
+    Default: 'arn:aws:iam::147023161607:role/LabRole'
+  ```
 
 3. Validate the template file
     ```sh
