@@ -1,0 +1,18 @@
+Resources:
+  budgets:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: budgets
+      AttributeDefinitions:
+        - AttributeName: element
+          AttributeType: S
+        - AttributeName: id
+          AttributeType: N
+      KeySchema:
+        - AttributeName: element
+          KeyType: HASH
+        - AttributeName: id
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1

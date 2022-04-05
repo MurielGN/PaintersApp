@@ -1,0 +1,7 @@
+put-one-materials:
+  role: "arn:aws:iam::178233312549:role/LabRole"
+  handler: src/CRUD_lambda/put-one-materials-painters.handler
+  events:
+    - httpApi:
+        path: /materials/{id}
+        method: put

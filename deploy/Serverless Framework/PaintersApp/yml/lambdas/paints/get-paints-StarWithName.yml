@@ -1,0 +1,7 @@
+get-paints-StarWithName:
+  role: "arn:aws:iam::178233312549:role/LabRole"
+  handler: src/CRUD_lambda/get-paints-StarWithName-painters.handler
+  events:
+    - httpApi:
+        path: /paints/filter/{expression}
+        method: get
