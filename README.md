@@ -100,9 +100,9 @@ Installation guide
     ```
 
 4. Upload the "UploadToS3" folder to the bucket
-  ```sh
-    aws s3 cp ./UploadToS3/* s3://example-bucket-name/
-  ```
+   ```sh
+   aws s3 cp ./UploadToS3/* s3://example-bucket-name/
+   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -113,10 +113,11 @@ Installation guide
 1. In the dynamodb-template.yml file change the BucketS3 Parameter with your bucket name
 
   Before
+
     ```yaml
-    BucketS3:
-    Type: String
-    Default: 'bucket-name'
+      BucketS3:
+      Type: String
+      Default: 'bucket-name'
     ```
   
   After
