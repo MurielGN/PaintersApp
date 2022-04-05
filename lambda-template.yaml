@@ -1,0 +1,157 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Lambda functions Deploy
+
+Parameters:
+  LambdaRoleARN:
+    Type: String
+    Default: 'arn:aws:iam::147023161607:role/LabRole'
+    
+  BucketS3:
+    Type: String
+    Default: 'painterapp'
+    
+Resources:
+  deleteonematerialspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/delete-one-materials-painters/delete-one-materials-painters.yaml
+  
+  getallmaterialspainters:  
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/get-all-materials-painters/get-all-materials-painters.yaml
+
+  getonematerialspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/get-one-materials-painters/get-one-materials-painters.yaml
+  
+  getmaterialsStarWithNamepainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/get-materials-StarWithName-painters/get-materials-StarWithName-painters.yaml
+
+  postmaterialspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/post-materials-painters/post-materials-painters.yaml
+
+  putonematerialspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/put-one-materials-painters/put-one-materials-painters.yaml
+
+  deleteonepaintspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/delete-one-paints-painters/delete-one-paints-painters.yaml
+
+  getallpaintspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/get-all-paints-painters/get-all-paints-painters.yaml
+
+  getonepaintspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/get-one-paints-painters/get-one-paints-painters.yaml
+
+  getpaintsStarWithNamepainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/get-paints-StarWithName-painters/get-paints-StarWithName-painters.yaml
+
+  postpaintspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/post-paints-painters/post-paints-painters.yaml
+
+  putonepaintspainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/put-one-paints-painters/put-one-paints-painters.yaml
+
+  budgetpainters:
+    'Fn::Transform':
+      Name: 'AWS::Include'
+      Parameters:
+        Location: !Sub s3://${BucketS3}/budget-painters.yaml
+
+Outputs:
+
+  putonematerialspainters:
+    Value: !GetAtt putonematerialspainters.Arn
+    Export:
+      Name: putonematerialspainters
+    
+  putonepaintspainters:
+    Value: !GetAtt putonepaintspainters.Arn
+    Export:
+      Name: putonepaintspainters
+
+  deleteonematerialspainters:
+    Value: !GetAtt deleteonematerialspainters.Arn
+    Export:
+      Name: deleteonematerialspainters
+
+  deleteonepaintspainters:
+    Value: !GetAtt deleteonepaintspainters.Arn
+    Export:
+      Name: deleteonepaintspainters
+
+  getallmaterialspainters:
+    Value: !GetAtt getallmaterialspainters.Arn
+    Export:
+      Name: getallmaterialspainters
+
+  getallpaintspainters:
+    Value: !GetAtt getallpaintspainters.Arn
+    Export:
+      Name: getallpaintspainters
+
+  getmaterialsStarWithNamepainters:
+    Value: !GetAtt getmaterialsStarWithNamepainters.Arn
+    Export:
+      Name: getmaterialsStarWithNamepainters
+
+  getpaintsStarWithNamepainters:
+    Value: !GetAtt getpaintsStarWithNamepainters.Arn
+    Export:
+      Name: getpaintsStarWithNamepainters
+
+  postmaterialspainters:
+    Value: !GetAtt postmaterialspainters.Arn
+    Export:
+      Name: postmaterialspainters
+
+  postpaintspainters:
+    Value: !GetAtt postpaintspainters.Arn
+    Export:
+      Name: postpaintspainters
+
+  getonepaintspainters:
+    Value: !GetAtt getonepaintspainters.Arn
+    Export:
+      Name: getonepaintspainters
+
+  getonematerialspainters:
+    Value: !GetAtt getonematerialspainters.Arn
+    Export:
+      Name: getonematerialspainters
+
+  budgetpainters:
+    Value: !GetAtt budgetpainters.Arn
+    Export:
+      Name: budgetpainters

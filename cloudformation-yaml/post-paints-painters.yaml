@@ -1,7 +1,7 @@
 Type: "AWS::Lambda::Function"
 Properties:
   FunctionName: "post-paints-painters"
-  Handler: index.handler
+  Handler: post-paints-painters.handler
   Runtime: nodejs12.x
   Role:
     Ref: LambdaRoleARN

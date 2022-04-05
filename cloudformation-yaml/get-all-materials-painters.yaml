@@ -1,7 +1,7 @@
   Type: "AWS::Lambda::Function"
   Properties:
     FunctionName: "get-all-materials-painters"
-    Handler: index.handler
+    Handler: get-all-materials-painters.handler
     Runtime: nodejs12.x
     Role:
       Ref: LambdaRoleARN

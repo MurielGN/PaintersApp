@@ -1,7 +1,7 @@
 Type: "AWS::Lambda::Function"
 Properties:
   FunctionName: "delete-one-materials-painters"
-  Handler: index.handler
+  Handler: delete-one-materials-painters.handler
   Runtime: nodejs12.x
   Role:
     Ref: LambdaRoleARN

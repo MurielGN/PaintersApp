@@ -1,0 +1,478 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: ApiGateway Deploy
+
+Resources:
+  apiGateway:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: 'painters-app'
+      Description: 'app to calculate painters budget'
+      FailOnWarnings: true
+      Body:
+        swagger: "2.0"
+        info:
+          version: "2022-03-28T10:45:09Z"
+          title: "PintoresApp"
+        host: "tn746yhr6k.execute-api.us-east-1.amazonaws.com"
+        basePath: "/dev1"
+        schemes:
+        - "https"
+        paths:
+          /budget:
+            post:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              responses:
+                "200":
+                  description: "200 response"
+                  schema:
+                    $ref: "#/definitions/Empty"
+              x-amazon-apigateway-integration:
+                type: "aws"
+                uri: !Sub
+                  -  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
+                  - lambdaArn: !ImportValue budgetpainters
+                httpMethod: "POST"
+                responses:
+                  default:
+                    statusCode: "200"
+                requestTemplates:
+                  application/json: "#set($inputRoot = $input.path('$'))\n{\n    \"item\"\
+                    : $input.json('$')\n}"
+                passthroughBehavior: "when_no_templates"
+                contentHandling: "CONVERT_TO_TEXT"
+          /materials:
+            get:
+              produces:
+              - "application/json"
+              responses:
+                "200":
+                  description: "200 response"
+                  schema:
+                    $ref: "#/definitions/Empty"
+              x-amazon-apigateway-integration:
+                type: "aws"
+                httpMethod: "POST"
+                uri: !Sub
+                  -  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
+                  - lambdaArn: !ImportValue getallmaterialspainters
+                responses:
+                  default:
+                    statusCode: "200"
+                passthroughBehavior: "when_no_match"
+                contentHandling: "CONVERT_TO_TEXT"
+            post:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              responses:
+                "200":
+                  description: "200 response"
+                  schema:
+                    $ref: "#/definitions/Empty"
+              x-amazon-apigateway-integration:
+                type: "aws"
+                httpMethod: "POST"
+                uri: !Sub
+                  -  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
+                  - lambdaArn: !ImportValue postmaterialspainters
+                responses:
+                  default:
+                    statusCode: "200"
+                requestTemplates:
+                  application/json: "#set($inputRoot = $input.path('$'))\n{\n    \"item\"\
+                    : $input.json('$')\n}"
+                passthroughBehavior: "when_no_templates"
+                contentHandling: "CONVERT_TO_TEXT"
+          /materials/filter/{expression}:
+            get:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - name: "expression"
+                in: "path"
+                required: true
+                type: "string"
+              responses:
+                "200":
+                  description: "200 response"
+                  schema:
+                    $ref: "#/definitions/Empty"
+              x-amazon-apigateway-integration:
+                type: "aws"
+                httpMethod: "POST"
+                uri: !Sub
+                  -  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
+                  - lambdaArn: !ImportValue getmaterialsStarWithNamepainters
+                responses:
+                  default:
+                    statusCode: "200"
+                requestTemplates:
+                  application/json: "#set($inputRoot = $input.path('$'))\n{\n    \"expression\"\
+                    : \"$input.params('expression')\"\n}"
+                passthroughBehavior: "when_no_templates"
+                contentHandling: "CONVERT_TO_TEXT"
+          /materials/{id}:
+            get:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - name: "id"
+                in: "path"
+                required: true
+                type: "string"
+              responses:
+                "200":
+                  description: "200 response"
+                  schema:
+                    $ref: "#/definitions/Empty"
+              x-amazon-apigateway-integration:
+                type: "aws"
+                httpMethod: "POST"
+                uri: !Sub
+                  -  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
+                  - lambdaArn: !ImportValue getonematerialspainters
+                responses:
+                  default:
+                    statusCode: "200"
+                requestTemplates:
+                  application/json: "#set($inputRoot = $input.path('$'))\n{\n    \"id\": $input.params('id')\n\
+                    }"
+                passthroughBehavior: "when_no_templates"
+                contentHandling: "CONVERT_TO_TEXT"
+            put:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - name: "id"
+                in: "path"
+                required: true
+                type: "string"
+              responses:
+                "200":
+                  description: "200 response"
+                  schema:
+                    $ref: "#/definitions/Empty"
+              x-amazon-apigateway-integration:
+                type: "aws"
+                httpMethod: "POST"
+                uri: !Sub
+                  -  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
+                  - lambdaArn: !ImportValue putonematerialspainters
+                responses:
+                  default:
+                    statusCode: "200"
+                requestTemplates:
+                  application/json: "#set($inputRoot = $input.path('$'))\n{\n    \"id\": $input.params('id'),\n\
+                    \    \"item\": $input.json('$')\n}"
+                passthroughBehavior: "when_no_templates"
+                contentHandling: "CONVERT_TO_TEXT"
+            delete:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - name: "id"
+                in: "path"
+                required: true
+                type: "string"
+              responses:
+                "200":
+                  description: "200 response"
+                  schema:
+                    $ref: "#/definitions/Empty"
+              x-amazon-apigateway-integration:
+                type: "aws"
+                httpMethod: "POST"
+                uri: !Sub
+                  -  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
+                  - lambdaArn: !ImportValue deleteonematerialspainters
+                responses:
+                  default:
+                    statusCode: "200"
+                requestTemplates:
+                  application/json: "#set($inputRoot = $input.path('$'))\n{\n    \"id\": $input.params('id')\n\
+                    }"
+                passthroughBehavior: "when_no_templates"
+                contentHandling: "CONVERT_TO_TEXT"
+          /paints:
+            get:
+              produces:
+              - "application/json"
+              responses:
+                "200":
+                  description: "200 response"
+                  schema:
+                    $ref: "#/definitions/Empty"
+              x-amazon-apigateway-integration:
+                type: "aws"
+                httpMethod: "POST"
+                uri: !Sub
+                  -  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
+                  - lambdaArn: !ImportValue getallpaintspainters
+                responses:
+                  default:
+                    statusCode: "200"
+                passthroughBehavior: "when_no_match"
+                contentHandling: "CONVERT_TO_TEXT"
+            post:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              responses:
+                "200":
+                  description: "200 response"
+                  schema:
+                    $ref: "#/definitions/Empty"
+              x-amazon-apigateway-integration:
+                type: "aws"
+                httpMethod: "POST"
+                uri: !Sub
+                  -  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
+                  - lambdaArn: !ImportValue postpaintspainters
+                responses:
+                  default:
+                    statusCode: "200"
+                requestTemplates:
+                  application/json: "#set($inputRoot = $input.path('$'))\n{\n    \"item\"\
+                    : $input.json('$')\n}"
+                passthroughBehavior: "when_no_templates"
+                contentHandling: "CONVERT_TO_TEXT"
+          /paints/filter/{expression}:
+            get:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - name: "expression"
+                in: "path"
+                required: true
+                type: "string"
+              responses:
+                "200":
+                  description: "200 response"
+                  schema:
+                    $ref: "#/definitions/Empty"
+              x-amazon-apigateway-integration:
+                type: "aws"
+                httpMethod: "POST"
+                uri: !Sub
+                  -  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
+                  - lambdaArn: !ImportValue getpaintsStarWithNamepainters
+                responses:
+                  default:
+                    statusCode: "200"
+                requestTemplates:
+                  application/json: "#set($inputRoot = $input.path('$'))\n{\n    \"expression\"\
+                    : \"$input.params('expression')\"\n}"
+                passthroughBehavior: "when_no_templates"
+                contentHandling: "CONVERT_TO_TEXT"
+          /paints/{id}:
+            get:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - name: "id"
+                in: "path"
+                required: true
+                type: "string"
+              responses:
+                "200":
+                  description: "200 response"
+                  schema:
+                    $ref: "#/definitions/Empty"
+              x-amazon-apigateway-integration:
+                type: "aws"
+                httpMethod: "POST"
+                uri: !Sub
+                  -  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
+                  - lambdaArn: !ImportValue getonepaintspainters
+                responses:
+                  default:
+                    statusCode: "200"
+                requestTemplates:
+                  application/json: "#set($inputRoot = $input.path('$'))\n{\n    \"id\": $input.params('id')\n\
+                    }"
+                passthroughBehavior: "when_no_templates"
+                contentHandling: "CONVERT_TO_TEXT"
+            put:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - name: "id"
+                in: "path"
+                required: true
+                type: "string"
+              responses:
+                "200":
+                  description: "200 response"
+                  schema:
+                    $ref: "#/definitions/Empty"
+              x-amazon-apigateway-integration:
+                type: "aws"
+                httpMethod: "POST"
+                uri: !Sub
+                  -  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
+                  - lambdaArn: !ImportValue putonepaintspainters
+                responses:
+                  default:
+                    statusCode: "200"
+                requestTemplates:
+                  application/json: "#set($inputRoot = $input.path('$'))\n{\n    \"id\": $input.params('id'),\n\
+                    \    \"item\": $input.json('$')\n}"
+                passthroughBehavior: "when_no_templates"
+                contentHandling: "CONVERT_TO_TEXT"
+            delete:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - name: "id"
+                in: "path"
+                required: true
+                type: "string"
+              responses:
+                "200":
+                  description: "200 response"
+                  schema:
+                    $ref: "#/definitions/Empty"
+              x-amazon-apigateway-integration:
+                type: "aws"
+                httpMethod: "POST"
+                uri: !Sub
+                  -  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
+                  - lambdaArn: !ImportValue deleteonepaintspainters
+                responses:
+                  default:
+                    statusCode: "200"
+                requestTemplates:
+                  application/json: "#set($inputRoot = $input.path('$'))\n{\n    \"id\": $input.params('id')\n\
+                    }"
+                passthroughBehavior: "when_no_templates"
+                contentHandling: "CONVERT_TO_TEXT"
+        definitions:
+          Empty:
+            type: "object"
+            title: "Empty Schema"
+
+  lambdaApiGatewayInvoke1:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !ImportValue putonematerialspainters
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+
+  lambdaApiGatewayInvoke2:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !ImportValue putonepaintspainters
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+
+  lambdaApiGatewayInvoke3:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !ImportValue deleteonematerialspainters
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+  
+  lambdaApiGatewayInvoke4:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !ImportValue deleteonepaintspainters
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+  
+  lambdaApiGatewayInvoke5:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !ImportValue getallmaterialspainters
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+  
+  lambdaApiGatewayInvoke6:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !ImportValue getallpaintspainters
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+  
+  lambdaApiGatewayInvoke7:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !ImportValue getmaterialsStarWithNamepainters
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+  
+  lambdaApiGatewayInvoke8:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !ImportValue getpaintsStarWithNamepainters
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+  
+  lambdaApiGatewayInvoke9:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !ImportValue postmaterialspainters
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+  
+  lambdaApiGatewayInvoke10:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !ImportValue postpaintspainters
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+  
+  lambdaApiGatewayInvoke11:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !ImportValue getonepaintspainters
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+  
+  lambdaApiGatewayInvoke12:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !ImportValue getonematerialspainters
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+
+  lambdaApiGatewayInvoke13:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !ImportValue budgetpainters
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+  

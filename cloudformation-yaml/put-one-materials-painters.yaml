@@ -1,7 +1,7 @@
 Type: "AWS::Lambda::Function"
 Properties:
   FunctionName: "put-one-materials-painters"
-  Handler: index.handler
+  Handler: put-one-materials-painters.handler
   Runtime: nodejs12.x
   Role:
     Ref: LambdaRoleARN
