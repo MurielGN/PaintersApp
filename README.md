@@ -147,6 +147,7 @@ Installation guide
 1. In the lambda-template.yml file change the BucketS3 Parameter with your bucket name
 
   Before
+  
     ```yaml
       BucketS3:
       Type: String
@@ -164,6 +165,7 @@ Installation guide
 2. In the lambda-template.yml file change the LambdaRoleARN Parameter with the arn of the role you want to use
 
   Before
+  
     ```yaml
       LambdaRoleARN:
       Type: String
