@@ -90,39 +90,128 @@ Installation guide
    git clone https://github.com/MurielGN/PaintersApp.git
    ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-### Deploy
-
-1. Go to the deploy directory
+2. Go to the deploy directory
    ```sh
-   cd deploy
+   cd deploy/CloudFormation/
    ```
 3. Create a s3 bucket
     ```sh
     aws s3 mb s3://example-bucket-name --region eu-west-1
     ```
-4. Run aws cloudformation package
-    ```sh
-   aws cloudformation package \
-      --template-file infrastructure.template \
-      --s3-bucket example-bucket-name \
-      --s3-prefix cfn-workshop-package-deploy \
-      --output-template-file infrastructure-packaged.template
-   ```
-5. Validate the template file
-    ```sh
-    aws cloudformation validate-template \
-        --template-body file://infrastructure-packaged.template
+
+4. Upload the "UploadToS3" folder to the bucket
+  ```sh
+    aws s3 cp ./UploadToS3/* s3://example-bucket-name/
+  ```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+### Deploy
+
+  #### DynamoDB Tables
+
+1. In the dynamodb-template.yml file change the BucketS3 Parameter with your bucket name
+
+  Before
+    ```yaml
+    BucketS3:
+    Type: String
+    Default: 'bucket-name'
     ```
-6. Deploy the package template
+  
+  After
+
+  ```yaml
+    BucketS3:
+    Type: String
+    Default: 'painterapp'
+  ```
+
+2. Validate the template file
     ```sh
-    aws cloudformation deploy \
-      --template-file infrastructure-packaged.template \
-      --stack-name example-stack-name \
-      --region eu-west-1 \
-      --capabilities CAPABILITY_IAM
+      aws cloudformation validate-template \
+          --template-body file://dynamodb-template.yml
     ```
+
+3. Deploy the package template
+    ```sh
+      aws cloudformation deploy \
+        --template-file dynamodb-template.yml \
+        --stack-name DynamoDBTables \
+        --region eu-west-1 \
+        --capabilities CAPABILITY_IAM
+    ```
+  
+  #### Lambda Functions
+
+1. In the lambda-template.yml file change the BucketS3 Parameter with your bucket name
+
+  Before
+  
+    ```yaml
+      BucketS3:
+      Type: String
+      Default: 'bucket-name'
+    ```
+  
+  After
+
+    ```yaml
+      BucketS3:
+      Type: String
+      Default: 'painterapp'
+    ```
+
+2. In the lambda-template.yml file change the LambdaRoleARN Parameter with the arn of the role you want to use
+
+  Before
+  
+    ```yaml
+      LambdaRoleARN:
+      Type: String
+      Default: 'role-arn'
+    ```
+  
+  After
+
+  ```yaml
+      LambdaRoleARN:
+      Type: String
+      Default: 'arn:aws:iam::147023161607:role/LabRole'
+    ```
+
+3. Validate the template file
+    ```sh
+      aws cloudformation validate-template \
+          --template-body file://lambda-template.yml
+    ```
+
+4. Deploy the package template
+    ```sh
+      aws cloudformation deploy \
+        --template-file lambda-template.yml \
+        --stack-name LambdaFunctions \
+        --region eu-west-1 \
+        --capabilities CAPABILITY_IAM
+    ```
+
+  #### DynamoDB Tables
+
+1. Validate the template file
+    ```sh
+      aws cloudformation validate-template \
+          --template-body file://apigateway-template.yml
+    ```
+
+2. Deploy the package template
+    ```sh
+      aws cloudformation deploy \
+        --template-file apigateway-template.yml \
+        --stack-name ApiGateway \
+        --region eu-west-1 \
+        --capabilities CAPABILITY_IAM
+    ```
+  
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 

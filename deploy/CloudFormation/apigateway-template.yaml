@@ -1,16 +1,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Example Lambda zip copy
-Parameters:
-  LambdaRoleARN:
-    Type: String
-    Default: 'arn:aws:iam::147023161607:role/LabRole'
+Description: ApiGateway Deploy
 
 Resources:
   apiGateway:
     Type: AWS::ApiGateway::RestApi
     Properties:
-      Name: 'experimental-api'
-      Description: 'An experimental API, deployed programmatically'
+      Name: 'painters-app'
+      Description: 'app to calculate painters budget'
       FailOnWarnings: true
       Body:
         swagger: "2.0"

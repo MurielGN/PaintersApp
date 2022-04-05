@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Example Lambda zip copy
+Description: Lambda functions Deploy
 
 Parameters:
   LambdaRoleARN:
