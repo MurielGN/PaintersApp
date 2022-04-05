@@ -1,0 +1,7 @@
+get-one-paints:
+  role: "arn:aws:iam::178233312549:role/LabRole"
+  handler: src/CRUD_lambda/get-one-paints-painters.handler
+  events:
+    - httpApi:
+        path: /paints/{id}
+        method: get

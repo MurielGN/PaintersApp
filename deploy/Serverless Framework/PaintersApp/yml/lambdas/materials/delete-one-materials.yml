@@ -1,0 +1,7 @@
+delete-one-materials:
+  role: "arn:aws:iam::178233312549:role/LabRole"
+  handler: src/CRUD_lambda/delete-one-materials-painters.handler
+  events:
+    - httpApi:
+        path: /materials/{id}
+        method: delete

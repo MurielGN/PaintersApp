@@ -1,0 +1,18 @@
+Resources:
+  materials:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: materials
+      AttributeDefinitions:
+        - AttributeName: element
+          AttributeType: S
+        - AttributeName: id
+          AttributeType: N
+      KeySchema:
+        - AttributeName: element
+          KeyType: HASH
+        - AttributeName: id
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1

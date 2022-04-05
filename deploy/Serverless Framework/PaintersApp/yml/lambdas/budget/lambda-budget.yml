@@ -1,0 +1,7 @@
+budget-painters:
+  role: "arn:aws:iam::178233312549:role/LabRole"
+  handler: src/budget_lambda/budget-painters.handler
+  events:
+    - httpApi:
+        path: /budget
+        method: post

@@ -1,0 +1,7 @@
+get-materials-StarWithName:
+  role: "arn:aws:iam::178233312549:role/LabRole"
+  handler: src/CRUD_lambda/get-materials-StarWithName-painters.handler
+  events:
+    - httpApi:
+        path: /materials/filter/{expression}
+        method: get
