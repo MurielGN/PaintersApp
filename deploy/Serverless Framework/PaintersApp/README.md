@@ -1,3 +1,24 @@
+<div id="top"></div>
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/MurielGN/PaintersApp">
+    <img src="https://gravity.es/wp-content/uploads/2021/08/logo-blue.svg" alt="Logo" width="150" height="150">
+  </a>
+
+  <h3 align="center">Painters App</h3>
+
+  <p align="center">
+    Application to calculate painting budgets!
+    <br />
+    <br />
+    <a href="https://github.com/MurielGN/PaintersApp/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/MurielGN/PaintersApp/issues">Request Feature</a>
+  </p>
+</div>
+
 <!--
 title: 'AWS Simple HTTP Endpoint example in NodeJS'
 description: 'This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.'
