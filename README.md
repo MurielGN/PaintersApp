@@ -125,21 +125,21 @@ Installation guide
     BucketS3:
     Type: String
     Default: 'painterapp'
-    ```
+  ```
 
 2. Validate the template file
     ```sh
-    aws cloudformation validate-template \
-        --template-body file://dynamodb-template.yml
+      aws cloudformation validate-template \
+          --template-body file://dynamodb-template.yml
     ```
 
 3. Deploy the package template
     ```sh
-    aws cloudformation deploy \
-      --template-file dynamodb-template.yml \
-      --stack-name DynamoDBTables \
-      --region eu-west-1 \
-      --capabilities CAPABILITY_IAM
+      aws cloudformation deploy \
+        --template-file dynamodb-template.yml \
+        --stack-name DynamoDBTables \
+        --region eu-west-1 \
+        --capabilities CAPABILITY_IAM
     ```
   
   #### Lambda Functions
@@ -148,66 +148,66 @@ Installation guide
 
   Before
     ```yaml
-    BucketS3:
-    Type: String
-    Default: 'bucket-name'
+      BucketS3:
+      Type: String
+      Default: 'bucket-name'
     ```
   
   After
 
     ```yaml
-    BucketS3:
-    Type: String
-    Default: 'painterapp'
+      BucketS3:
+      Type: String
+      Default: 'painterapp'
     ```
 
 2. In the lambda-template.yml file change the LambdaRoleARN Parameter with the arn of the role you want to use
 
   Before
     ```yaml
-    LambdaRoleARN:
-    Type: String
-    Default: 'role-arn'
+      LambdaRoleARN:
+      Type: String
+      Default: 'role-arn'
     ```
   
   After
 
   ```yaml
-    LambdaRoleARN:
-    Type: String
-    Default: 'arn:aws:iam::147023161607:role/LabRole'
+      LambdaRoleARN:
+      Type: String
+      Default: 'arn:aws:iam::147023161607:role/LabRole'
     ```
 
 3. Validate the template file
     ```sh
-    aws cloudformation validate-template \
-        --template-body file://lambda-template.yml
+      aws cloudformation validate-template \
+          --template-body file://lambda-template.yml
     ```
 
 4. Deploy the package template
     ```sh
-    aws cloudformation deploy \
-      --template-file lambda-template.yml \
-      --stack-name LambdaFunctions \
-      --region eu-west-1 \
-      --capabilities CAPABILITY_IAM
+      aws cloudformation deploy \
+        --template-file lambda-template.yml \
+        --stack-name LambdaFunctions \
+        --region eu-west-1 \
+        --capabilities CAPABILITY_IAM
     ```
 
   #### DynamoDB Tables
 
 1. Validate the template file
     ```sh
-    aws cloudformation validate-template \
-        --template-body file://apigateway-template.yml
+      aws cloudformation validate-template \
+          --template-body file://apigateway-template.yml
     ```
 
 2. Deploy the package template
     ```sh
-    aws cloudformation deploy \
-      --template-file apigateway-template.yml \
-      --stack-name ApiGateway \
-      --region eu-west-1 \
-      --capabilities CAPABILITY_IAM
+      aws cloudformation deploy \
+        --template-file apigateway-template.yml \
+        --stack-name ApiGateway \
+        --region eu-west-1 \
+        --capabilities CAPABILITY_IAM
     ```
   
 <p align="right">(<a href="#top">back to top</a>)</p>
