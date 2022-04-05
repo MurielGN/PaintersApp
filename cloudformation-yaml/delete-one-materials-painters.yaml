@@ -9,4 +9,4 @@ Properties:
   Code:
     S3Bucket:
       Ref: BucketS3
-    S3Key: "materials/delete-one-materials-painters/delete-one-materials-painters.zip"
+    S3Key: "delete-one-materials-painters.zip"

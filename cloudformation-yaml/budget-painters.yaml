@@ -9,4 +9,4 @@ Properties:
   Code:
     S3Bucket:
       Ref: BucketS3
-    S3Key: "budget-painters/budget-painters.zip"
+    S3Key: "budget-painters.zip"

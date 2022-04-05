@@ -9,4 +9,4 @@ Properties:
   Code:
     S3Bucket:
       Ref: BucketS3
-    S3Key: "paints/put-one-paints-painters/put-one-paints-painters.zip"
+    S3Key: "put-one-paints-painters.zip"
