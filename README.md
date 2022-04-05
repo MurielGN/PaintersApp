@@ -102,7 +102,7 @@ Installation guide
 4. Upload the "UploadToS3" folder to the bucket
   ```sh
     aws s3 cp ./UploadToS3/* s3://example-bucket-name/
-    ```
+  ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -155,7 +155,7 @@ Installation guide
   
   After
 
-  ```yaml
+    ```yaml
     BucketS3:
     Type: String
     Default: 'painterapp'
