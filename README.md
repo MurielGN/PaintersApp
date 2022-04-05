@@ -114,11 +114,11 @@ Installation guide
 
   Before
 
-    ```yaml
-      BucketS3:
-      Type: String
-      Default: 'bucket-name'
-    ```
+  ```yaml
+    BucketS3:
+    Type: String
+    Default: 'bucket-name'
+  ```
   
   After
 
