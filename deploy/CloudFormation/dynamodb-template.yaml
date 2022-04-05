@@ -1,11 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Example Lambda zip copy
+Description: DynamoDB tables Deploy
 
 Parameters:
-  LambdaRoleARN:
-    Type: String
-    Default: 'arn:aws:iam::147023161607:role/LabRole'
-    
   BucketS3:
     Type: String
     Default: 'painterapp'
