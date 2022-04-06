@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir toUpload
-cp cloudformation-yaml/* toUpload
+cp cloudformation-yaml/templates/* toUpload
 echo "Nombre del bucket a crear?"
 read bucket
 echo "Nombre del rol para las lambdas"

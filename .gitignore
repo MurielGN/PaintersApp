@@ -5,3 +5,5 @@ jspm_packages
 .vscode
 # Serverless directories
 .serverless
+
+package-lock.json
