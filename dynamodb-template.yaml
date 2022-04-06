@@ -4,29 +4,29 @@ Description: DynamoDB tables Deploy
 Parameters:
   BucketS3:
     Type: String
-    Default: 'painterapp'
+    Default: 'paintersapp'
     
 Resources:
   myBudgetTable:
     'Fn::Transform':
       Name: 'AWS::Include'
       Parameters:
-        Location: !Sub s3://${BucketS3}/dynamodb/budgets.yaml
+        Location: !Sub s3://${BucketS3}/budgets.yaml
       
   myHousesTable:
     'Fn::Transform':
       Name: 'AWS::Include'
       Parameters:
-        Location: !Sub s3://${BucketS3}/dynamodb/houses.yaml
+        Location: !Sub s3://${BucketS3}/houses.yaml
 
   myMaterialsTable:
     'Fn::Transform':
       Name: 'AWS::Include'
       Parameters:
-        Location: !Sub s3://${BucketS3}/dynamodb/materials.yaml
+        Location: !Sub s3://${BucketS3}/materials.yaml
   
   myPaintsTable:
     'Fn::Transform':
       Name: 'AWS::Include'
       Parameters:
-        Location: !Sub s3://${BucketS3}/dynamodb/paints.yaml
+        Location: !Sub s3://${BucketS3}/paints.yaml
