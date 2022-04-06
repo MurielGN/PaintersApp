@@ -30,7 +30,7 @@ custom:
   dynamodb:
     stages:
       - dev
-	
-# plugins:
-#   - serverless-offline
-#   - serverless-dynamodb-local
+
+plugins:
+  - serverless-offline
+  - serverless-dynamodb-local
