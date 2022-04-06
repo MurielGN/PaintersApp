@@ -1,7 +1,7 @@
 Type: "AWS::Lambda::Function"
 Properties:
   FunctionName: "budget-painters"
-  Handler: budget-painters.handler
+  Handler: index.handler
   Runtime: nodejs12.x
   Role:
     Ref: LambdaRoleARN

@@ -11,9 +11,12 @@ for file in $(ls ./src)
 do
 name=$(echo "$file" | cut -f 1 -d '.')
 echo "Zipping ${file}"
-zip toUpload/$name src/$file
+cd ./src
+mv $file index.js
+zip ../toUpload/$name index.js
+mv index.js $file
+cd ..
 done
-
 aws s3 sync ./toUpload s3://$bucket
 
 rm -R toUpload

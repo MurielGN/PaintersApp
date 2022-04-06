@@ -1,7 +1,7 @@
 Type: "AWS::Lambda::Function"
 Properties:
   FunctionName: "get-one-paints-painters"
-  Handler: get-one-paints-painters.handler
+  Handler: index.handler
   Runtime: nodejs12.x
   Role:
     Ref: LambdaRoleARN
