@@ -188,7 +188,7 @@ Installation guide
         --capabilities CAPABILITY_IAM
     ```
   
-  #### Deploy with Serverless Framework [here](https://github.com/MurielGN/PaintersApp/tree/main/deploy/Serverless%20Framework/PaintersApp/README.md)
+  #### Deploy with Serverless Framework [here](https://github.com/MurielGN/PaintersApp/tree/main/serverless-yaml)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
