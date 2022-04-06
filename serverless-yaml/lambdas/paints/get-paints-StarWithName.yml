@@ -2,6 +2,10 @@ get-paints-StarWithName:
   role: "arn:aws:iam::178233312549:role/LabRole"
   handler: src/CRUD_lambda/get-paints-StarWithName-painters.handler
   events:
-    - httpApi:
+    - http:
         path: /paints/filter/{expression}
         method: get
+        integration: lambda
+        request:
+          template:
+            application/json: '#set($inputRoot = $input.path(''$'')){"expression": "$input.params(''expression'')"}'

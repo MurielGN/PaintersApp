@@ -2,6 +2,10 @@ put-one-paints:
   role: "arn:aws:iam::178233312549:role/LabRole"
   handler: src/CRUD_lambda/put-one-paints-painters.handler
   events:
-    - httpApi:
+    - http:
         path: /paints/{id}
         method: put
+        integration: lambda
+        request:
+          template:
+            application/json: '#set($inputRoot = $input.path(''$'')){"id": $input.params(''id''),"item": $input.json(''$'')}}'

@@ -2,6 +2,10 @@ delete-one-paints:
   role: "arn:aws:iam::178233312549:role/LabRole"
   handler: src/CRUD_lambda/delete-one-paints-painters.handler
   events:
-    - httpApi:
+    - http:
         path: /paints/{id}
         method: delete
+        integration: lambda
+        request:
+          template:
+            application/json: '#set($inputRoot = $input.path(''$'')){"id": $input.params(''id'')}'

@@ -6,31 +6,31 @@ provider:
   runtime: nodejs14.x
 
 functions: 
-  - ${file(yml/lambdas/budget/lambda-budget.yml)}
-  - ${file(yml/lambdas/materials/get-all-materials.yml)}
-  - ${file(yml/lambdas/materials/post-materials.yml)}
-  - ${file(yml/lambdas/materials/get-materials-StarWithName.yml)}
-  - ${file(yml/lambdas/materials/delete-one-materials.yml)}
-  - ${file(yml/lambdas/materials/get-one-materials.yml)}
-  - ${file(yml/lambdas/materials/put-one-materials.yml)}
-  - ${file(yml/lambdas/paints/get-all-paints.yml)}
-  - ${file(yml/lambdas/paints/post-paints.yml)}
-  - ${file(yml/lambdas/paints/get-paints-StarWithName.yml)}
-  - ${file(yml/lambdas/paints/delete-one-paints.yml)}
-  - ${file(yml/lambdas/paints/get-one-paints.yml)}
-  - ${file(yml/lambdas/paints/put-one-paints.yml)}
+  - ${file(serverless-yaml/lambdas/budget/lambda-budget.yml)}
+  - ${file(serverless-yaml/lambdas/materials/get-all-materials.yml)}
+  - ${file(serverless-yaml/lambdas/materials/post-materials.yml)}
+  - ${file(serverless-yaml/lambdas/materials/get-materials-StarWithName.yml)}
+  - ${file(serverless-yaml/lambdas/materials/delete-one-materials.yml)}
+  - ${file(serverless-yaml/lambdas/materials/get-one-materials.yml)}
+  - ${file(serverless-yaml/lambdas/materials/put-one-materials.yml)}
+  - ${file(serverless-yaml/lambdas/paints/get-all-paints.yml)}
+  - ${file(serverless-yaml/lambdas/paints/post-paints.yml)}
+  - ${file(serverless-yaml/lambdas/paints/get-paints-StarWithName.yml)}
+  - ${file(serverless-yaml/lambdas/paints/delete-one-paints.yml)}
+  - ${file(serverless-yaml/lambdas/paints/get-one-paints.yml)}
+  - ${file(serverless-yaml/lambdas/paints/put-one-paints.yml)}
 
 resources:
-  - ${file(yml/dynamodb/materials.yml)}
-  - ${file(yml/dynamodb/paints.yml)}
-  - ${file(yml/dynamodb/houses.yml)}
-  - ${file(yml/dynamodb/budgets.yml)}
+  - ${file(serverless-yaml/dynamodb/materials.yml)}
+  - ${file(serverless-yaml/dynamodb/paints.yml)}
+  - ${file(serverless-yaml/dynamodb/houses.yml)}
+  - ${file(serverless-yaml/dynamodb/budgets.yml)}
 
 custom:
   dynamodb:
     stages:
       - dev
-
-plugins:
-  - serverless-offline
-  - serverless-dynamodb-local
+	
+# plugins:
+#   - serverless-offline
+#   - serverless-dynamodb-local

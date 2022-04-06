@@ -1,7 +1,11 @@
 post-materials:
   role: "arn:aws:iam::178233312549:role/LabRole"
-  handler: src/CRUD_lambda/post-materials-painters.handler
+  handler: src/post-materials-painters.handler
   events:
-    - httpApi:
-        path: /materials
+    - http:
         method: post
+        path: materials
+        integration: lambda
+        request:
+          template:
+            application/json: '#set($inputRoot = $input.path(''$'')){"item": $input.json(''$'')}'

@@ -2,6 +2,10 @@ get-one-materials:
   role: "arn:aws:iam::178233312549:role/LabRole"
   handler: src/CRUD_lambda/get-one-materials-painters.handler
   events:
-    - httpApi:
+    - http:
         path: /materials/{id}
         method: get
+        integration: lambda
+        request:
+          template:
+            application/json: '#set($inputRoot = $input.path(''$'')){"id": $input.params(''id'')}'

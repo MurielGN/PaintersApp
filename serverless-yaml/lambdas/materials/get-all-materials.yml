@@ -1,7 +1,11 @@
 get-all-materials:
   role: "arn:aws:iam::178233312549:role/LabRole"
-  handler: src/CRUD_lambda/get-all-materials-painters.handler
+  handler: src/get-all-materials-painters.handler
   events:
-    - httpApi:
-        path: /materials
+    - http:
         method: get
+        path: materials
+        integration: lambda
+        request:
+          template:
+            application/json: '{ "httpMethod" : "$context.httpMethod" }'
