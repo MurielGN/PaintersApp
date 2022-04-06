@@ -105,8 +105,12 @@ Installation guide
 ### Modular deployment
 
   #### DynamoDB Tables
+1. Go to cloudformation-yaml directory
+   ```sh
+   cd cloudformation-yaml
+   ```
 
-1. In the dynamodb-template.yml file change the BucketS3 Parameter with your bucket name
+2. In the dynamodb-template.yml file change the BucketS3 Parameter with your bucket name
 
       Before
 
@@ -124,7 +128,7 @@ Installation guide
         Default: 'painterapp'
       ```
 
-2. Deploy the package template
+3. Deploy the package template
     ```sh
       aws cloudformation deploy \
         --template-file dynamodb-template.yml \
@@ -134,7 +138,12 @@ Installation guide
   
   #### Lambda Functions
 
-1. In the lambda-template.yml file change the BucketS3 Parameter with your bucket name
+1. Go to cloudformation-yaml directory
+   ```sh
+   cd cloudformation-yaml
+   ```
+
+2. In the lambda-template.yml file change the BucketS3 Parameter with your bucket name
 
       Before
 
@@ -152,7 +161,7 @@ Installation guide
         Default: 'painterapp'
       ```
 
-2. In the lambda-template.yml file change the LambdaRoleARN Parameter with the arn of the role you want to use
+3. In the lambda-template.yml file change the LambdaRoleARN Parameter with the arn of the role you want to use
 
       Before
 
@@ -170,7 +179,7 @@ Installation guide
         Default: 'arn:aws:iam::147023161607:role/LabRole'
       ```
 
-3. Deploy the package template
+4. Deploy the package template
     ```sh
       aws cloudformation deploy \
         --template-file lambda-template.yml \
@@ -180,7 +189,12 @@ Installation guide
 
   #### ApiGateway
 
-1. Deploy the package template
+1. Go to cloudformation-yaml directory
+   ```sh
+   cd cloudformation-yaml
+   ```
+
+2. Deploy the package template
     ```sh
       aws cloudformation deploy \
         --template-file apigateway-template.yml \
@@ -199,7 +213,7 @@ Installation guide
 
 You can load the swagger/swagger-file.yaml into https://editor.swagger.io/ to see the documentation of the API
 
-[swagger-file.yaml](https://github.com/MurielGN/PaintersApp/blob/main/swagger/swagger-file.yaml)
+[swagger-file.yaml](https://github.com/MurielGN/PaintersApp/blob/main/Api-Documentation/swagger_v6.yaml)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -210,6 +224,6 @@ You can load the swagger/swagger-file.yaml into https://editor.swagger.io/ to se
 
 To test the API you can import postman/postman-file.json into your Postman App to import the postman collection and test the API
 
-[postman-file.json](https://github.com/MurielGN/PaintersApp/blob/main/postman/postman-file.json)
+[postman-file.json](https://github.com/MurielGN/PaintersApp/blob/main/Api-Documentation/postman_collection.json)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
