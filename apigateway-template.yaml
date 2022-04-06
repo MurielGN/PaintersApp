@@ -378,7 +378,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: !ImportValue putonematerialspainters
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/PUT/materials/*
 
   lambdaApiGatewayInvoke2:
     Type: AWS::Lambda::Permission
@@ -386,7 +386,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: !ImportValue putonepaintspainters
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/PUT/paints/*
 
   lambdaApiGatewayInvoke3:
     Type: AWS::Lambda::Permission
@@ -394,7 +394,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: !ImportValue deleteonematerialspainters
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/DELETE/materials/*
   
   lambdaApiGatewayInvoke4:
     Type: AWS::Lambda::Permission
@@ -402,7 +402,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: !ImportValue deleteonepaintspainters
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/DELETE/paints/*
   
   lambdaApiGatewayInvoke5:
     Type: AWS::Lambda::Permission
@@ -410,7 +410,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: !ImportValue getallmaterialspainters
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/GET/materials
   
   lambdaApiGatewayInvoke6:
     Type: AWS::Lambda::Permission
@@ -418,7 +418,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: !ImportValue getallpaintspainters
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/GET/paints
   
   lambdaApiGatewayInvoke7:
     Type: AWS::Lambda::Permission
@@ -426,7 +426,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: !ImportValue getmaterialsStarWithNamepainters
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/GET/materials/filter/*
   
   lambdaApiGatewayInvoke8:
     Type: AWS::Lambda::Permission
@@ -434,15 +434,15 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: !ImportValue getpaintsStarWithNamepainters
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
-  
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/GET/paints/filter/*
+
   lambdaApiGatewayInvoke9:
     Type: AWS::Lambda::Permission
     Properties:
       Action: lambda:InvokeFunction
       FunctionName: !ImportValue postmaterialspainters
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/POST/materials
   
   lambdaApiGatewayInvoke10:
     Type: AWS::Lambda::Permission
@@ -450,7 +450,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: !ImportValue postpaintspainters
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/POST/paints
   
   lambdaApiGatewayInvoke11:
     Type: AWS::Lambda::Permission
@@ -458,7 +458,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: !ImportValue getonepaintspainters
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/GET/paints/*
   
   lambdaApiGatewayInvoke12:
     Type: AWS::Lambda::Permission
@@ -466,7 +466,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: !ImportValue getonematerialspainters
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/GET/materials/*
 
   lambdaApiGatewayInvoke13:
     Type: AWS::Lambda::Permission
@@ -474,5 +474,5 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: !ImportValue budgetpainters
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/POST/budget
   

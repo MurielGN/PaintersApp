@@ -4,11 +4,11 @@ Description: Lambda functions Deploy
 Parameters:
   LambdaRoleARN:
     Type: String
-    Default: 'arn:aws:iam::147023161607:role/LabRole'
+    Default: 'role_arn'
     
   BucketS3:
     Type: String
-    Default: 'painterapp'
+    Default: 'bucket_name'
     
 Resources:
   #Lambdas

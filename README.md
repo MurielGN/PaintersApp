@@ -37,6 +37,7 @@
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
         <li><a href="#Deploy">Deploy</a></li>
+        <li><a href="#Modular deployment">Modular deployment</a></li>
       </ul>
     </li>
     <li><a href="#Swagger">Swagger</a></li>
@@ -90,23 +91,18 @@ Installation guide
    git clone https://github.com/MurielGN/PaintersApp.git
    ```
 
-2. Go to the deploy directory
-   ```sh
-   cd deploy/CloudFormation/
-   ```
-3. Create a s3 bucket
-    ```sh
-    aws s3 mb s3://example-bucket-name --region eu-west-1
-    ```
-
-4. Upload the "UploadToS3" folder to the bucket
-   ```sh
-   aws s3 cp ./UploadToS3/* s3://example-bucket-name/
-   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Deploy
+
+1. run the deploy script with
+   ```sh
+   sh deployall.sh
+   ```
+2. Introduce a bucket name to upload all the resources
+3. Introduce the role name you want for your lambda functions
+### Modular deployment
 
   #### DynamoDB Tables
 
@@ -128,18 +124,11 @@ Installation guide
         Default: 'painterapp'
       ```
 
-2. Validate the template file
-    ```sh
-      aws cloudformation validate-template \
-          --template-body file://dynamodb-template.yml
-    ```
-
-3. Deploy the package template
+2. Deploy the package template
     ```sh
       aws cloudformation deploy \
         --template-file dynamodb-template.yml \
         --stack-name DynamoDBTables \
-        --region eu-west-1 \
         --capabilities CAPABILITY_IAM
     ```
   
@@ -181,35 +170,21 @@ Installation guide
         Default: 'arn:aws:iam::147023161607:role/LabRole'
       ```
 
-3. Validate the template file
-    ```sh
-      aws cloudformation validate-template \
-          --template-body file://lambda-template.yml
-    ```
-
-4. Deploy the package template
+3. Deploy the package template
     ```sh
       aws cloudformation deploy \
         --template-file lambda-template.yml \
         --stack-name LambdaFunctions \
-        --region eu-west-1 \
         --capabilities CAPABILITY_IAM
     ```
 
-  #### DynamoDB Tables
+  #### ApiGateway
 
-1. Validate the template file
-    ```sh
-      aws cloudformation validate-template \
-          --template-body file://apigateway-template.yml
-    ```
-
-2. Deploy the package template
+1. Deploy the package template
     ```sh
       aws cloudformation deploy \
         --template-file apigateway-template.yml \
         --stack-name ApiGateway \
-        --region eu-west-1 \
         --capabilities CAPABILITY_IAM
     ```
   

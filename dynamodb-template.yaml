@@ -4,7 +4,7 @@ Description: DynamoDB tables Deploy
 Parameters:
   BucketS3:
     Type: String
-    Default: 'paintersapp'
+    Default: 'paintersapp98'
     
 Resources:
   myBudgetTable:
